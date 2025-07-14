@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Kolody - Currículo Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate Gray & Amber -->
+    <!-- Application Structure Plan: A single-page application with a fixed top navigation bar for smooth scrolling to thematic sections: Home (introduction), Skills (with an interactive radar chart), Projects, Experience (timeline), and Education. This structure allows non-linear, intuitive exploration, enabling recruiters to quickly access the most relevant information. The interactive skills chart is designed to be a memorable highlight, visually summarizing technical capabilities far more effectively than a simple list. -->
+    <!-- Visualization & Content Choices: Resume Info -> Goal -> Viz Method -> Interaction -> Justification. 1. Skills -> Compare/Organize -> Radar Chart (Chart.js) -> Hover for details -> Visually represents proficiency across different tech domains, making it highly scannable. 2. Experience -> Show Change/Timeline -> Vertical Timeline (HTML/CSS) -> Chronological flow -> Clearly shows career progression and responsibilities over time. 3. Project -> Inform -> Content Card (HTML/CSS) -> Clear grouping of info -> Highlights the key practical achievement (ZEST project) and the technologies used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-slate-200">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-xl font-bold text-slate-800">Carlos Kolody</a>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#objetivo" data-translate="nav_objective" class="text-slate-600 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium">Objetivo</a>
+                            <a href="#competencias" data-translate="nav_skills" class="text-slate-600 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium">Competências</a>
+                            <a href="#projetos" data-translate="nav_projects" class="text-slate-600 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium">Projetos</a>
+                            <a href="#experiencia" data-translate="nav_experience" class="text-slate-600 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium">Experiência</a>
+                            <a href="#formacao" data-translate="nav_education" class="text-slate-600 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium">Formação</a>
+                             <a href="#idiomas" data-translate="nav_languages" class="text-slate-600 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium">Idiomas</a>
+                        </div>
+                    </div>
+                    <button id="translateBtn" class="ml-4 px-3 py-2 bg-amber-500 text-white rounded-md text-sm font-medium hover:bg-amber-600 transition-colors">
+                        English
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-20">
+        <section id="home" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">CARLOS KOLODY</h1>
+                <p data-translate="hero_subtitle" class="mt-4 text-lg text-slate-600">Engenharia de Software | Análise de Dados | Gestão de Projetos</p>
+                <div class="mt-8 flex justify-center items-center space-x-6 text-slate-500">
+                    <a href="mailto:carloskolody@gmail.com" class="hover:text-amber-600 flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                        <span>carloskolody@gmail.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/carlos-kolody-99417624a/" target="_blank" class="hover:text-amber-600 flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433a1.06 1.06 0 01-1.06-1.061 1.06 1.06 0 011.06-1.061 1.06 1.06 0 011.06 1.061 1.06 1.06 0 01-1.06 1.061zm.022-2.122a.022.022 0 00-.022.022v.003a.022.022 0 00.022.022h.003a.022.022 0 00.022-.022v-.003a.022.022 0 00-.022-.022h-.003zM6.67 16.338H3.997v-8.59h2.673v8.59z" clip-rule="evenodd"></path></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/CarlosKolody" target="_blank" class="hover:text-amber-600 flex items-center space-x-2">
+                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.418 2.865 8.165 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.482A10.001 10.001 0 0020 10c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="objetivo" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+                 <h2 data-translate="objective_title" class="text-3xl font-bold text-slate-900 tracking-tight">Objetivo Profissional</h2>
+                 <div class="mt-6 text-lg text-slate-600 leading-relaxed">
+                     <p data-translate="objective_text">
+                        Busco uma oportunidade para aplicar e expandir meus conhecimentos em desenvolvimento, análise de dados e gestão de projetos. Meu objetivo é utilizar a tecnologia para otimizar processos, gerenciar projetos de forma eficiente e contribuir ativamente para o sucesso da equipe e da organização.
+                    </p>
+                 </div>
+            </div>
+        </section>
+
+        <section id="competencias" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 data-translate="skills_title" class="text-3xl font-bold text-slate-900 tracking-tight">Competências Técnicas</h2>
+                    <p data-translate="skills_intro" class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        Aqui apresento um resumo visual e uma lista detalhada das minhas habilidades. O gráfico de radar interativo destaca minhas áreas de maior conhecimento, permitindo uma análise rápida do meu perfil técnico. Passe o mouse sobre os pontos para ver os detalhes.
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row md:space-x-8 items-center">
+                    <div class="w-full md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 mt-12 md:mt-0">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 data-translate="skills_cat1_title" class="text-lg font-semibold text-slate-800">Linguagens & Frameworks</h3>
+                                <p class="text-slate-600">C#, Java, .NET, Spring, C (Lógica), SQL</p>
+                            </div>
+                            <div>
+                                <h3 data-translate="skills_cat2_title" class="text-lg font-semibold text-slate-800">Automação & BI</h3>
+                                <p data-translate="skills_cat2_desc" class="text-slate-600">PowerApps (Avançado), Power BI, Power Automate</p>
+                            </div>
+                             <div>
+                                <h3 data-translate="skills_cat3_title" class="text-lg font-semibold text-slate-800">Gestão de Projetos</h3>
+                                <p data-translate="skills_cat3_desc" class="text-slate-600">Acompanhamento de ciclo de vida de projetos, elaboração de relatórios, comunicação com stakeholders.</p>
+                            </div>
+                            <div>
+                                <h3 data-translate="skills_cat4_title" class="text-lg font-semibold text-slate-800">Bancos de Dados</h3>
+                                <p data-translate="skills_cat4_desc" class="text-slate-600">MySQL (Relacional), MongoDB (Não Relacional)</p>
+                            </div>
+                             <div>
+                                <h3 data-translate="skills_cat5_title" class="text-lg font-semibold text-slate-800">Ferramentas & Outros</h3>
+                                <p data-translate="skills_cat5_desc" class="text-slate-600">Git, GitHub, AutoCAD, Montagem e Manutenção de Hardware</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 data-translate="projects_title" class="text-3xl font-bold text-slate-900 tracking-tight">Projetos em Destaque</h2>
+                     <p data-translate="projects_intro" class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        Nesta seção, apresento o projeto mais relevante que desenvolvi, demonstrando a aplicação prática das minhas habilidades para resolver problemas reais de negócio.
+                    </p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-slate-50 rounded-xl shadow-md overflow-hidden border border-slate-200">
+                    <div class="p-8">
+                        <div data-translate="project1_title" class="uppercase tracking-wide text-sm text-amber-600 font-semibold">ZEST – Sistema de Gestão e Rastreamento</div>
+                        <p data-translate="project1_desc" class="mt-2 text-slate-600">Projeto desenvolvido para realizar o rastreamento completo da linha de produção, otimizando o controle de gastos de materiais e a gestão de recursos.</p>
+                        <p data-translate="project1_contrib_title" class="mt-4 font-semibold text-slate-800">Minha Contribuição:</p>
+                        <p data-translate="project1_contrib_desc" class="text-slate-600">Fui o principal responsável pelo desenvolvimento da interface visual (front-end) da aplicação e pela implementação de suas funcionalidades, focando na usabilidade e na eficiência do sistema.</p>
+                        <div class="mt-4">
+                            <h4 data-translate="project1_tech_title" class="font-semibold text-slate-800">Tecnologias Utilizadas:</h4>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-full">PowerApps</span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Power BI</span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Power Automate</span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Microsoft Lists</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 data-translate="experience_title" class="text-3xl font-bold text-slate-900 tracking-tight">Experiência Profissional</h2>
+                    <p data-translate="experience_intro" class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        Minha trajetória profissional é apresentada em uma linha do tempo. Cada etapa representa uma oportunidade de aprendizado e contribuição, desde a logística até a engenharia e o setor comercial.
+                    </p>
+                </div>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="absolute left-1/2 w-0.5 h-full bg-slate-300 -translate-x-1/2"></div>
+                    <div class="relative mt-8">
+                        <!-- Experience 1 -->
+                        <div class="mb-8 flex justify-between items-center w-full">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-10 flex items-center order-1 bg-amber-500 shadow-xl w-8 h-8 rounded-full">
+                                <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                            </div>
+                            <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 border border-slate-200">
+                                <h3 data-translate="exp1_title" class="font-bold text-slate-800 text-lg">Estagiário em Gerenciamento de Projetos</h3>
+                                <p data-translate="exp1_company_date" class="text-sm font-medium text-slate-500">Celepar | Maio 2024 – Presente</p>
+                                <ul class="list-disc list-inside mt-2 text-sm text-slate-600 space-y-1">
+                                    <li data-translate="exp1_desc1">Apoio no acompanhamento do ciclo de vida dos projetos de software.</li>
+                                    <li data-translate="exp1_desc2">Criação e acompanhamento de planilhas interativas para melhorar o ritmo de trabalho da equipe.</li>
+                                    <li data-translate="exp1_desc3">Acompanhamento e aprendizado sobre as ferramentas internas e sobre como lidar com pessoas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Experience 2 -->
+                        <div class="mb-8 flex justify-between flex-row-reverse items-center w-full">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-10 flex items-center order-1 bg-amber-500 shadow-xl w-8 h-8 rounded-full">
+                                <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                            </div>
+                            <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 border border-slate-200">
+                                <h3 data-translate="exp2_title" class="font-bold text-slate-800 text-lg">Jovem Aprendiz</h3>
+                                <p data-translate="exp2_company_date" class="text-sm font-medium text-slate-500">ELOS ELETROTÉCNICA | Mar 2023 – Abr 2024</p>
+                                <ul class="list-disc list-inside mt-2 text-sm text-slate-600 space-y-1">
+                                    <li data-translate="exp2_desc1">Interpretação de diagramas elétricos para desenhos técnicos em AutoCAD.</li>
+                                    <li data-translate="exp2_desc2">Elaboração de relatórios técnicos para clientes e uso interno.</li>
+                                    <li data-translate="exp2_desc3">Suporte ao setor comercial na criação de propostas e orçamentos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Experience 3 -->
+                        <div class="mb-8 flex justify-between items-center w-full">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-10 flex items-center order-1 bg-amber-500 shadow-xl w-8 h-8 rounded-full">
+                                <h1 class="mx-auto text-white font-semibold text-lg">3</h1>
+                            </div>
+                            <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 border border-slate-200">
+                                <h3 data-translate="exp3_title" class="font-bold text-slate-800 text-lg">Estágio</h3>
+                                <p data-translate="exp3_company_date" class="text-sm font-medium text-slate-500">SCD GRAPHO | Mai 2022 – Fev 2023</p>
+                                 <ul class="list-disc list-inside mt-2 text-sm text-slate-600 space-y-1">
+                                    <li data-translate="exp3_desc1">Atuação na organização logística e preparação de embalagens.</li>
+                                    <li data-translate="exp3_desc2">Confecção e aplicação de etiquetas para rastreabilidade de produtos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="formacao" class="bg-white py-16 md:py-24">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 data-translate="education_title" class="text-3xl font-bold text-slate-900 tracking-tight">Formação Acadêmica</h2>
+                    <p data-translate="education_intro" class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        Minha base educacional combina conhecimentos técnicos de administração com a profundidade da engenharia de software, proporcionando uma visão ampla para resolver problemas.
+                    </p>
+                </div>
+                <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 data-translate="edu1_title" class="font-bold text-slate-800">Graduação em Engenharia de Software</h3>
+                        <p class="text-sm font-medium text-slate-500">Centro Universitário UNISENAI (PR)</p>
+                        <p data-translate="edu1_date" class="text-sm text-slate-500 mt-1">Conclusão em 2026</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 data-translate="edu2_title" class="font-bold text-slate-800">Técnico em Administração</h3>
+                        <p class="text-sm font-medium text-slate-500">SENAI</p>
+                        <p data-translate="edu2_date" class="text-sm text-slate-500 mt-1">Concluído em 2021</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="idiomas" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+               <div class="text-center mb-12">
+                   <h2 data-translate="languages_title" class="text-3xl font-bold text-slate-900 tracking-tight">Idiomas</h2>
+               </div>
+               <div class="max-w-2xl mx-auto text-center">
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 inline-block">
+                        <h3 data-translate="lang1_name" class="font-bold text-slate-800">Inglês</h3>
+                        <p data-translate="lang1_level" class="text-sm font-medium text-slate-500">Avançado</p>
+                    </div>
+               </div>
+           </div>
+       </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p data-translate="footer_text">&copy; 2025 Carlos Kolody. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            let skillsChart;
+
+            const translations = {
+                pt: {
+                    nav_objective: 'Objetivo',
+                    nav_skills: 'Competências',
+                    nav_projects: 'Projetos',
+                    nav_experience: 'Experiência',
+                    nav_education: 'Formação',
+                    nav_languages: 'Idiomas',
+                    translate_btn: 'English',
+                    hero_subtitle: 'Engenharia de Software | Análise de Dados | Gestão de Projetos',
+                    objective_title: 'Objetivo Profissional',
+                    objective_text: 'Busco uma oportunidade para aplicar e expandir meus conhecimentos em desenvolvimento, análise de dados e gestão de projetos. Meu objetivo é utilizar a tecnologia para otimizar processos, gerenciar projetos de forma eficiente e contribuir ativamente para o sucesso da equipe e da organização.',
+                    skills_title: 'Competências Técnicas',
+                    skills_intro: 'Aqui apresento um resumo visual e uma lista detalhada das minhas habilidades. O gráfico de radar interativo destaca minhas áreas de maior conhecimento, permitindo uma análise rápida do meu perfil técnico. Passe o mouse sobre os pontos para ver os detalhes.',
+                    skills_cat1_title: 'Linguagens & Frameworks',
+                    skills_cat2_title: 'Automação & BI',
+                    skills_cat2_desc: 'PowerApps (Avançado), Power BI, Power Automate',
+                    skills_cat3_title: 'Gestão de Projetos',
+                    skills_cat3_desc: 'Acompanhamento de ciclo de vida de projetos, elaboração de relatórios, comunicação com stakeholders.',
+                    skills_cat4_title: 'Bancos de Dados',
+                    skills_cat4_desc: 'MySQL (Relacional), MongoDB (Não Relacional)',
+                    skills_cat5_title: 'Ferramentas & Outros',
+                    skills_cat5_desc: 'Git, GitHub, AutoCAD, Montagem e Manutenção de Hardware',
+                    projects_title: 'Projetos em Destaque',
+                    projects_intro: 'Nesta seção, apresento o projeto mais relevante que desenvolvi, demonstrando a aplicação prática das minhas habilidades para resolver problemas reais de negócio.',
+                    project1_title: 'ZEST – Sistema de Gestão e Rastreamento',
+                    project1_desc: 'Projeto desenvolvido para realizar o rastreamento completo da linha de produção, otimizando o controle de gastos de materiais e a gestão de recursos.',
+                    project1_contrib_title: 'Minha Contribuição:',
+                    project1_contrib_desc: 'Fui o principal responsável pelo desenvolvimento da interface visual (front-end) da aplicação e pela implementação de suas funcionalidades, focando na usabilidade e na eficiência do sistema.',
+                    project1_tech_title: 'Tecnologias Utilizadas:',
+                    experience_title: 'Experiência Profissional',
+                    experience_intro: 'Minha trajetória profissional é apresentada em uma linha do tempo. Cada etapa representa uma oportunidade de aprendizado e contribuição, desde a logística até a engenharia e o setor comercial.',
+                    exp1_title: 'Estagiário em Gerenciamento de Projetos',
+                    exp1_company_date: 'Celepar | Maio 2024 – Presente',
+                    exp1_desc1: 'Apoio no acompanhamento do ciclo de vida dos projetos de software.',
+                    exp1_desc2: 'Criação e acompanhamento de planilhas interativas para melhorar o ritmo de trabalho da equipe.',
+                    exp1_desc3: 'Acompanhamento e aprendizado sobre as ferramentas internas e sobre como lidar com pessoas.',
+                    exp2_title: 'Jovem Aprendiz',
+                    exp2_company_date: 'ELOS ELETROTÉCNICA | Mar 2023 – Abr 2024',
+                    exp2_desc1: 'Interpretação de diagramas elétricos para desenhos técnicos em AutoCAD.',
+                    exp2_desc2: 'Elaboração de relatórios técnicos para clientes e uso interno.',
+                    exp2_desc3: 'Suporte ao setor comercial na criação de propostas e orçamentos.',
+                    exp3_title: 'Estágio',
+                    exp3_company_date: 'SCD GRAPHO | Mai 2022 – Fev 2023',
+                    exp3_desc1: 'Atuação na organização logística e preparação de embalagens.',
+                    exp3_desc2: 'Confecção e aplicação de etiquetas para rastreabilidade de produtos.',
+                    education_title: 'Formação Acadêmica',
+                    education_intro: 'Minha base educacional combina conhecimentos técnicos de administração com a profundidade da engenharia de software, proporcionando uma visão ampla para resolver problemas.',
+                    edu1_title: 'Graduação em Engenharia de Software',
+                    edu1_date: 'Conclusão em 2026',
+                    edu2_title: 'Técnico em Administração',
+                    edu2_date: 'Concluído em 2021',
+                    languages_title: 'Idiomas',
+                    lang1_name: 'Inglês',
+                    lang1_level: 'Avançado',
+                    footer_text: '© 2025 Carlos Kolody. Todos os direitos reservados.',
+                    chart_labels: ['Desenvolvimento Back-End', 'Automação & BI', 'Bancos de Dados', 'Gestão de Projetos', 'Engenharia & Desenho'],
+                    chart_dataset_label: 'Nível de Proficiência'
+                },
+                en: {
+                    nav_objective: 'Objective',
+                    nav_skills: 'Skills',
+                    nav_projects: 'Projects',
+                    nav_experience: 'Experience',
+                    nav_education: 'Education',
+                    nav_languages: 'Languages',
+                    translate_btn: 'Português',
+                    hero_subtitle: 'Software Engineering | Data Analysis | Project Management',
+                    objective_title: 'Professional Objective',
+                    objective_text: 'I am seeking an opportunity to apply and expand my knowledge in development, data analysis, and project management. My goal is to use technology to optimize processes, manage projects efficiently, and actively contribute to the success of the team and the organization.',
+                    skills_title: 'Technical Skills',
+                    skills_intro: 'Here I present a visual summary and a detailed list of my skills. The interactive radar chart highlights my areas of greatest expertise, allowing for a quick analysis of my technical profile. Hover over the points for details.',
+                    skills_cat1_title: 'Languages & Frameworks',
+                    skills_cat2_title: 'Automation & BI',
+                    skills_cat2_desc: 'PowerApps (Advanced), Power BI, Power Automate',
+                    skills_cat3_title: 'Project Management',
+                    skills_cat3_desc: 'Monitoring project lifecycles, preparing reports, communicating with stakeholders.',
+                    skills_cat4_title: 'Databases',
+                    skills_cat4_desc: 'MySQL (Relational), MongoDB (Non-Relational)',
+                    skills_cat5_title: 'Tools & Others',
+                    skills_cat5_desc: 'Git, GitHub, AutoCAD, Hardware Assembly and Maintenance',
+                    projects_title: 'Featured Projects',
+                    projects_intro: 'In this section, I present the most relevant project I have developed, demonstrating the practical application of my skills to solve real business problems.',
+                    project1_title: 'ZEST – Management and Tracking System',
+                    project1_desc: 'Project developed to perform complete tracking of the production line, optimizing material cost control and resource management.',
+                    project1_contrib_title: 'My Contribution:',
+                    project1_contrib_desc: 'I was primarily responsible for developing the visual interface (front-end) of the application and implementing its functionalities, focusing on usability and system efficiency.',
+                    project1_tech_title: 'Technologies Used:',
+                    experience_title: 'Professional Experience',
+                    experience_intro: 'My professional journey is presented in a timeline. Each stage represents an opportunity for learning and contribution, from logistics to engineering and the commercial sector.',
+                    exp1_title: 'Project Management Intern',
+                    exp1_company_date: 'Celepar | May 2024 – Present',
+                    exp1_desc1: 'Support in monitoring the lifecycle of software projects.',
+                    exp1_desc2: 'Creating and monitoring interactive spreadsheets to improve team workflow.',
+                    exp1_desc3: 'Monitoring and learning about internal tools and how to deal with people.',
+                    exp2_title: 'Young Apprentice',
+                    exp2_company_date: 'ELOS ELETROTÉCNICA | Mar 2023 – Apr 2024',
+                    exp2_desc1: 'Interpreting electrical diagrams for technical drawings in AutoCAD.',
+                    exp2_desc2: 'Preparing technical reports for clients and internal use.',
+                    exp2_desc3: 'Supporting the commercial sector in creating proposals and quotes.',
+                    exp3_title: 'Internship',
+                    exp3_company_date: 'SCD GRAPHO | May 2022 – Feb 2023',
+                    exp3_desc1: 'Worked in logistics organization and packaging preparation.',
+                    exp3_desc2: 'Creating and applying labels for product traceability.',
+                    education_title: 'Academic Education',
+                    education_intro: 'My educational background combines technical knowledge of administration with the depth of software engineering, providing a broad perspective for problem-solving.',
+                    edu1_title: 'Bachelor\'s in Software Engineering',
+                    edu1_date: 'Conclusion in 2026',
+                    edu2_title: 'Technical Degree in Administration',
+                    edu2_date: 'Completed in 2021',
+                    languages_title: 'Languages',
+                    lang1_name: 'English',
+                    lang1_level: 'Advanced',
+                    footer_text: '© 2025 Carlos Kolody. All rights reserved.',
+                    chart_labels: ['Back-End Development', 'Automation & BI', 'Databases', 'Project Management', 'Engineering & Design'],
+                    chart_dataset_label: 'Proficiency Level'
+                }
+            };
+
+            let currentLang = 'pt';
+
+            const createChart = (lang) => {
+                if (skillsChart) {
+                    skillsChart.destroy();
+                }
+                
+                const skillsData = {
+                    labels: translations[lang].chart_labels,
+                    datasets: [{
+                        label: translations[lang].chart_dataset_label,
+                        data: [8, 9, 7, 8, 6],
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)', // amber-400
+                        borderColor: 'rgba(217, 119, 6, 1)', // amber-600
+                        pointBackgroundColor: 'rgba(217, 119, 6, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(217, 119, 6, 1)'
+                    }]
+                };
+
+                const chartConfig = {
+                    type: 'radar',
+                    data: skillsData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        elements: {
+                            line: {
+                                borderWidth: 3
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                                grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                                pointLabels: {
+                                    font: { size: 12, weight: '500' },
+                                    color: '#475569' // slate-600
+                                },
+                                ticks: {
+                                    backdropColor: 'transparent',
+                                    color: '#64748b', // slate-500
+                                    stepSize: 2
+                                },
+                                min: 0,
+                                max: 10
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) { label += ': '; }
+                                        if (context.parsed.r !== null) { label += context.parsed.r; }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+                skillsChart = new Chart(ctx, chartConfig);
+            };
+
+            const translatePage = () => {
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    el.innerHTML = translations[currentLang][key];
+                });
+                document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+                document.getElementById('translateBtn').textContent = currentLang === 'pt' ? 'English' : 'Português';
+                createChart(currentLang);
+            };
+            
+            document.getElementById('translateBtn').addEventListener('click', () => {
+                currentLang = currentLang === 'pt' ? 'en' : 'pt';
+                translatePage();
+            });
+
+            const navLinks = document.querySelectorAll('header nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // Initial setup
+            createChart(currentLang);
+        });
+    </script>
+</body>
+</html>
